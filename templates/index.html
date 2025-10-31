@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MGNREGA Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+</head>
+
+<body class="bg-light">
+  <div class="container py-4">
+    <h2 class="text-center mb-4">📊 MGNREGA Dashboard for Rural Awareness</h2>
+
+    <!-- District Filter -->
+    <form method="POST" class="mb-4">
+      <div class="input-group">
+        <select name="district" class="form-select">
+          {% for d in districts %}
+          <option value="{{ d }}" {% if d == selected_district %}selected{% endif %}>{{ d }}</option>
+          {% endfor %}
+        </select>
+        <button class="btn btn-primary" type="submit">Filter</button>
+      </div>
+    </form>
+
+    <!-- Summary Metrics -->
+    <div class="row text-center mb-4">
+      {% for key, value in metrics.items() %}
+      <div class="col-md-3">
+        <div class="card shadow-sm border-0 p-3">
+          <h6>{{ key }}</h6>
+          <h4 class="text-primary">{{ value }}</h4>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Graphs -->
+    <div class="row">
+      <div class="col-md-6">
+        <div id="persondays"></div>
+      </div>
+      <div class="col-md-6">
+        <div id="women"></div>
+      </div>
+    </div>
+
+    <script>
+      const persondays_fig = {{ persondays_graph | safe }};
+      const women_fig = {{ women_graph | safe }};
+      Plotly.newPlot("persondays", persondays_fig.data, persondays_fig.layout);
+      Plotly.newPlot("women", women_fig.data, women_fig.layout);
+    </script>
+
+    <hr />
+    <p class="text-center mt-4 text-muted">
+      🌍 Developed by <b>Priyanka K</b> | Internship Project: <i>MGNREGA Dashboard for Data Visualization & Rural Awareness</i>
+    </p>
+  </div>
+</body>
+</html>
+
