@@ -101,5 +101,5 @@ Mobile-responsive layout
 
  License
 
-This project was developed as part of an Internship Project (Central Government Scheme Analysis).
+This project was developed as part of an Internship Project .
 © 2025 Priyanka — All rights reserved.
